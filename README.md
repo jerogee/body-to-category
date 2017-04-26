@@ -23,7 +23,7 @@ With macro:
 The easiest way to install this macro is:
 * Press `Alt` + `F11` to bring up the `VBA` environment.
 * In the Project pane, under `Project1`, double-click the built-in `ThisOutlookSession` module to open it.
-* Copy & paste the macro code (use Github's raw view) into it.
+* Copy & paste the macro code from `tagFromBodyToCategory.vba` (use Github's raw view) into it.
 * Close the editor.
 * To be able to run the macro, set the security settings appropriately: In Outlook 2007 and higher, the macro security settings are in `Options` | `Trust Center` | `Trust Center Settings...` | `Macro Settings` dialog. Set macro security to `Notifications for all macros`. Restart Outlook.
 
