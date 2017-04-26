@@ -1,4 +1,4 @@
-# els-tag-repair
+# body-to-category
 
 Server-side injection of tag or warning message strings directly in the email body is not only a technically unfortunate implementation but has numerous drawbacks for users (e.g. it is not automatically stripped from replies)
 
