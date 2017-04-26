@@ -11,8 +11,10 @@ This macro achieves the following:
 
 ## Screenshots
 
+Without macro:
 ![Without macro](https://raw.githubusercontent.com/jerogee/els-tag-repair/master/img/ss_without.png)
 
+With macro:
 ![With macro](https://raw.githubusercontent.com/jerogee/els-tag-repair/master/img/ss_with.png)
 
 
@@ -23,5 +25,10 @@ The easiest way to install this macro is:
 * In the Project pane, under `Project1`, double-click the built-in `ThisOutlookSession` module to open it.
 * Copy & paste the macro code (use Github's raw view) into it.
 * Close the editor.
-* To be able to run the macro: In Outlook 2007 and higher, the macro security settings are in the `Tools` | `Trust Center` dialog. Set macro security to `Warn on all macros`. Restart Outlook.
+* To be able to run the macro: In Outlook 2007 and higher, the macro security settings are in `Options` | `Trust Center` | `Trust Center Settings...` | Macro Settings` dialog. Set macro security to `Notifications for all macros`. Restart Outlook.
+
+
+## Considerations
+
+Outlook also allows to set macro security to `Enable all macro's`. Even though you will not be bothered for a single confirmation on Outlook startup, it will reduce security as potentially malicious macro's that might be attached to incoming emails could also get active unnoticed. **DO NOT USE THIS SETTING**, and make sure to select `Notifications for all macros` instead.
 
