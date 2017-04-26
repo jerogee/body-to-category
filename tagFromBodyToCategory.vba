@@ -28,6 +28,18 @@ Private Sub Application_NewMailEx(ByVal EntryIDCollection As String)
     regex.IgnoreCase = True
     regex.Global = True
 
+    ' Check if External category has already been added. If not add.
+    catFound = False
+    For Each objCat In objNS.Categories
+        If objCat.Name = "External" Then
+            catFound = True
+            Exit For
+        End If
+    Next
+    If Not catFound Then
+        objNS.Categories.Add "External", 2, 0
+    End If
+
     ' Inspect all entities. If the string is found, assign an 'External'
     ' category and replace the string. Could be improved with a nice regex
     ' and newline/HTML stripping, but will do for now.
@@ -35,18 +47,6 @@ Private Sub Application_NewMailEx(ByVal EntryIDCollection As String)
     For intX = 0 To UBound(strIDs)
         Set objEM = objNS.GetItemFromID(strIDs(intX))
         If InStr(1, objEM.Body, s) > 0 Then
-            ' Check if External category has already been added. If not add.
-            catFound = False
-            For Each objCat In objNS.Categories
-                If objCat.Name = "External" Then
-                    catFound = True
-                    Exit For
-                End If
-            Next
-            If Not catFound Then
-                objNS.Categories.Add "External", 2, 0
-            End If
-
             ' Set category to External
             objEM.Categories = "External"
 
