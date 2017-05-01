@@ -5,7 +5,7 @@ Server-side injection of tag or warning message strings directly in the email bo
 This Outlook VBA macro repairs the email body by removing such strings from from the email body and sets a more appropriate [custom category](https://support.office.com/en-us/article/Create-and-assign-color-categories-a1fde97e-15e1-4179-a1a0-8a91ef89b8dc) instead.
 
 This macro achieves the following:
-- it removes a specific string from the email body of any incoming email
+- it removes a specific string from the email body of any email received in the last two days or any newly incoming email
 - and sets a custom category instead so emails are still marked
 - the string is currently set to "External email: use caution" with surrounding asterisks (line 23)
 
