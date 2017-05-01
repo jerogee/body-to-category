@@ -21,7 +21,7 @@ With macro:
 ## Installation
 
 The easiest way to install this macro is:
-* Download the macro file [BodyToCategory.bas](https://github.com/jerogee/body-to-category/raw/master/tagFromBodyToCategory.vba)
+* Download the macro file [BodyToCategory.bas](https://github.com/jerogee/body-to-category/raw/master/BodyToCategory.bas)
 * In Outlook, press `Alt` + `F11` to bring up the `VBA` environment.
 * In the Project pane, Right-click on `Project1`, select `Import File...`, open `BodyToCategory.bas`
 * Under `Project1`, double-click on the built-in `ThisOutlookSession` module to open it.
