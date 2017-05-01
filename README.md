@@ -40,3 +40,6 @@ End Sub
 * Upon (re)starting Outlook, outlook will ask whether to enable the macro or not.
 
 
+## Notes
+
+If you need to customize the macro for a specific string, please change line 53 of BodyToCategory.bas. Yoy then may also need to change the regular expressions on lines 31 and 35.
