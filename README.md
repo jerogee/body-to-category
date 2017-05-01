@@ -42,4 +42,6 @@ End Sub
 
 ## Notes
 
-If you need to customize the macro for a specific string, please change line 53 of BodyToCategory.bas. Yoy then may also need to change the regular expressions on lines 31 and 35.
+If you need to customize the macro for a specific string, please change line 53 of BodyToCategory.bas. You then may also need to change the regular expressions on lines 31 and 35.
+
+Finally, do realise that enabling macros, even in a restrictive way, may make Outlook slightly more vulnerable. If possible, please [self-sign](https://support.office.com/en-gb/article/Digitally-sign-a-macro-project-6e5de679-01d4-4387-85e0-92e3e9a49483) the macro and set the Trust Center settings to only accept signed macros.
