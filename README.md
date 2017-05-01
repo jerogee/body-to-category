@@ -21,14 +21,22 @@ With macro:
 ## Installation
 
 The easiest way to install this macro is:
-* Press `Alt` + `F11` to bring up the `VBA` environment.
-* In the Project pane, under `Project1`, double-click the built-in `ThisOutlookSession` module to open it.
-* Copy & paste the macro code from `tagFromBodyToCategory.vba` (use Github's raw view) into it.
-* Close the editor.
-* To be able to run the macro, set the security settings appropriately: In Outlook 2007 and higher, the macro security settings are in `Options` | `Trust Center` | `Trust Center Settings...` | `Macro Settings` dialog. Set macro security to `Notifications for all macros`. Restart Outlook.
+* Download the macro file [BodyToCategory.bas](https://github.com/jerogee/body-to-category/raw/master/tagFromBodyToCategory.vba)
+* In Outlook, press `Alt` + `F11` to bring up the `VBA` environment.
+* In the Project pane, Right-click on `Project1`, select `Import File...`, open `BodyToCategory.bas`
+* Under `Project1`, double-click on the built-in `ThisOutlookSession` module to open it.
+* Copy & paste the following two calls, for triggering the macro upon receiving new email and upon startup:
+```VB.net
+Private Sub Application_NewMailEx(ByVal EntryIDCollection As String)
+    StripCollection EntryIDCollection
+End Sub
 
+Private Sub Application_Startup()
+    StripInbox do_all_messages:=False
+End Sub
+```
+* Select `File | Save`, and close the editor.
+* To be able to run the macro, set the security settings appropriately: In Outlook 2007 and higher, the macro security settings are in `Options | Trust Center | Trust Center Settings... | Macro Settings` dialog. Set macro security to `Notifications for all macros`. 
+* Upon (re)starting Outlook, outlook will ask whether to enable the macro or not.
 
-## Considerations
-
-Outlook also allows to set macro security to `Enable all macro's`. Even though you will not be bothered for a single confirmation on Outlook startup, it will reduce security as potentially malicious macro's that might be attached to incoming emails could also get active unnoticed. **DO NOT USE THIS SETTING**, and make sure to select `Notifications for all macros` instead.
 
