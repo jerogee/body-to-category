@@ -26,16 +26,10 @@ Public Sub BodyToCategory(ByRef objMI As Outlook.MailItem, ByVal s As String)
         End If
 
         ' Strip the offending string
+        regex.Pattern = "\**\s*" & s & "\s*\**"
         If objMI.BodyFormat = olFormatHTML Then
-            ' Direct pattern
-            regex.Pattern = "<p><span[^>]*?><strong>\*+\s*" & s & "\s*\*+</strong></span></p>[\r\n]*<p>&nbsp;</p>"
-            objMI.HTMLBody = regex.Replace(objMI.HTMLBody, "")
-
-            ' Pattern after Outlook's HTML recoding (in case of Forward, re-send, etc.)
-            regex.Pattern = "<p[^>]*?><strong[^>]*?><span[^>]*?>\*+\s*" & s & "\s*\*+</span></strong>.*?</p>"
             objMI.HTMLBody = regex.Replace(objMI.HTMLBody, "")
         Else
-            regex.Pattern = "\*+\s*" & s & "\s*\*+"
             objMI.Body = regex.Replace(objMI.Body, "")
         End If
 
@@ -59,27 +53,16 @@ End Sub
 ' Check if external category has been defined. If not, define it.
 Public Sub SetExternalCategory()
     Dim objNS As Outlook.NameSpace
-    Dim objCat As Category
-    Dim catFound As Boolean
+    On Error Resume Next
 
     ' Get namespace
     Set objNS = Application.GetNamespace("MAPI")
 
-    ' Check if External category has already been added. If not add.
-    catFound = False
-    For Each objCat In objNS.Categories
-        If objCat.Name = "External" Then
-            catFound = True
-            Exit For
-        End If
-    Next
-    If Not catFound Then
-        objNS.Categories.Add "External", 2, 0
-    End If
+    ' Add category (if exists -> runtime error -> ignore)
+    objNS.Categories.Add "External", 2, 0
 
     ' Clean up
     Set objNS = Nothing
-    Set objCat = Nothing
 End Sub
 
 ' Process each MailItem in an EntryIDCollection, and strip out
@@ -87,6 +70,7 @@ End Sub
 ' exists. This needs to be called upon new email, in: Application_NewMailEx()
 Public Sub StripCollection(EntryIDCollection As String)
     Dim objNS As Outlook.NameSpace
+    Dim Item as Object
     Dim strIDs() As String
     Dim intX As Integer
 
@@ -99,11 +83,15 @@ Public Sub StripCollection(EntryIDCollection As String)
     ' Inspect all entities.
     strIDs = Split(EntryIDCollection, ",")
     For intX = 0 To UBound(strIDs)
-        StripTag objNS.GetItemFromID(strIDs(intX))
+        Set Item = objNS.GetItemFromID(strIDs(intX))
+        If TypeOf Item Is Outlook.MailItem Then
+            StripTag Item
+        End If
     Next
 
     ' Clean up
     Set objNS = Nothing
+    Set Item = Nothing
 End Sub
 
 ' Process each MailItem in the Inbox, and strip out
